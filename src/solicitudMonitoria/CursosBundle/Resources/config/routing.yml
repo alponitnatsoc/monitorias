@@ -1,0 +1,3 @@
+solicitud_monitoria_cursos_cursos:
+    path:     /
+    defaults: { _controller: solicitudMonitoriaCursosBundle:Default:cursos }

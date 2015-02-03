@@ -1,0 +1,25 @@
+solicitud_monitoria_jefe_seccion_homepage:
+    path:     /
+    defaults: { _controller: solicitudMonitoriaJefeSeccionBundle:Default:index }
+
+solicitud_monitoria_jefe_seccion_monitorias:
+    path:     /monitorias
+    defaults: { _controller: solicitudMonitoriaJefeSeccionBundle:Default:monitorias }
+    
+solicitud_monitoria_jefe_seccion_actualizar_monitorias:
+    path:     /actualizar_monitorias
+    defaults: { _controller: solicitudMonitoriaJefeSeccionBundle:Default:actualizarmoni }
+    
+solicitud_monitoria_jefe_seccion_asignaciones:
+    path:     /asignaciones
+    defaults: { _controller: solicitudMonitoriaJefeSeccionBundle:Default:asignaciones }
+
+solicitud_monitoria_jefe_seccion_asignaciones_actualizar:
+    path:     /asignaciones_actualizar
+    defaults: { _controller: solicitudMonitoriaJefeSeccionBundle:Default:actualizarasigna }
+
+solicitud_monitoria_jefe_seccion_estudiante:
+    path:     /estudiante/{idEstudiante}
+    defaults: { _controller: solicitudMonitoriaJefeSeccionBundle:Default:estudiante }
+    
+    

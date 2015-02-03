@@ -1,0 +1,48 @@
+{% extends 'solicitudMonitoriaEstudianteBundle::mainEstudiante.html.twig' %}
+{% block contenido %}
+    <h2>Información Personal</h2> 
+    <form action="{{ path('solicitud_monitoria_estudiante_actualizar_informacion') }}" method="post">
+        <table class="mitabla">
+            <tr class="rst">
+                <td class="rst">CódigoSIU:</td>
+                <td class="sec">{{estudiante.getId()}}</td>
+            </tr>
+            <tr class="par">
+                <td class="rst">Tipo de Documento:</td>
+                <td><select name="_tdocumento" size-font=20"px">
+                    <option selected>-- {{estudiante.TipoDocumento}} --</option>
+                    <option>Cédula</option>
+                    <option>Tarjeta de Identidad</option>
+                    <option>Pasaporte</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td class="rst">No. Documento:</td>
+                <td><input class="par" type="text"  name="_ndocumento" value="{{estudiante.NoDocumento}}"/></td>
+            </tr>
+            <tr class="par">
+                <td class="rst">Nombre:</td>
+                <td><input type="text"  name="_nombre" value="{{estudiante.Nombre}}"/></td>
+            </tr>
+            <tr>
+                <td class="rst">Correo:</td>
+                <td><input class="par" type="text"  name="_correo" value="{{estudiante.Correo}}"/></td>
+            </tr>
+            <tr class="par">
+                <td class="rst">Teléfono:</td>
+                <td><input  type="text"  name="_telefono" value="{{estudiante.Telefono}}"/></td>
+            </tr>
+            <tr>
+                <td class="rst">Semestre:</td>
+                <td><input class="par" type="text"  name="_semestre" value="{{estudiante.Semestre}}"/></td>
+            </tr>
+            <tr class="par">
+                <td class="rst">Promedio Acumulado:</td>
+                <td><input type="text" name="_promedio" value="{{estudiante.PromAcumulado}}"/></td>
+            </tr>   
+            <tr class="final" align="center">
+                <td ><button type="submit">Actualizar</button></td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}

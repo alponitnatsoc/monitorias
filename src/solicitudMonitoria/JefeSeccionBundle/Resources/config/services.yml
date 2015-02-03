@@ -1,0 +1,4 @@
+services:
+#    solicitud_monitoria_jefe_seccion.example:
+#        class: solicitudMonitoria\JefeSeccionBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

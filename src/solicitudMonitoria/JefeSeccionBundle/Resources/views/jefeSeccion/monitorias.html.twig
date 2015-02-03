@@ -1,0 +1,28 @@
+{% extends 'solicitudMonitoriaJefeSeccionBundle::mainJefeSeccion.html.twig' %}
+{% block contenido %}
+    <h2>Administrar Monitorías</h2>
+	<div align ="center">
+    <form action="{{ path('solicitud_monitoria_jefe_seccion_actualizar_monitorias') }}" method="post">
+        <table class="mitabla">
+			<tr valign="middle">
+                <td class="idc">IdCurso</td>
+                <td class="nomc">Nombre del Curso</td>
+				<td class="horas">Horas</td>
+                <td class="cantidad">Cantidad </td>
+            </tr>
+			{% for monitoria in monitorias%}
+                <tr class="par">
+                    <td><input hidden class="c" type="text"  name="_i{{monitoria.idCurso}}" value="{{monitoria.idCurso}}"/></td>
+                    <td class="idc">{{monitoria.idCurso}}</td>
+                    <td class="nomc">{{monitoria.NombreCurso}}</td>
+                    <td class="horas"><input class="c" type="text"  name="_h{{monitoria.idCurso}}" value="{{monitoria.Horas}}"/></td>
+                    <td class="cantidad"><input class="c" type="text"  name="_c{{monitoria.idCurso}}" value="{{monitoria.CantidadMonitorias}}"/></td>
+                </tr>
+			{% endfor %}
+            <tr class="final" align="center">
+                <td ><button type="submit">Actualizar</button></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+{% endblock %}

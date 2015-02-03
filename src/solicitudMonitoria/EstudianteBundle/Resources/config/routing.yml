@@ -1,0 +1,21 @@
+solicitud_monitoria_estudiante_homepage:
+    path:     /
+    defaults: { _controller: solicitudMonitoriaEstudianteBundle:Default:index }
+
+solicitud_monitoria_estudiante_informacion:
+    path:     /informacion
+    defaults: { _controller: solicitudMonitoriaEstudianteBundle:Default:informacion }
+
+solicitud_monitoria_estudiante_actualizar_informacion:
+    path: /actualizar_estudiantes
+    defaults: { _controller: solicitudMonitoriaEstudianteBundle:Default:actualizarestu }
+    
+solicitud_monitoria_estudiante_solicitar:
+    path:     /solicitar
+    defaults: { _controller: solicitudMonitoriaEstudianteBundle:Default:solicitar }
+
+solicitud_monitoria_estudiante_actualizar_solicitudes:
+    path:     /actualizar_solicitudes
+    defaults: { _controller: solicitudMonitoriaEstudianteBundle:Default:actualizarsoli }
+
+    

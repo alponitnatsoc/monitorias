@@ -1,0 +1,114 @@
+{% extends 'solicitudMonitoriaJefeSeccionBundle::mainJefeSeccion.html.twig' %}
+{% block contenido %}
+    <h2>Asignar Monitorías</h2>
+    <h3>Monitorías</h3> 
+    <div align="center">
+            <table class="mitabla" >
+                <tr valign="middle">
+                    <td class="idc"> idCurso</td>
+                    <td class="nomc">Nombre del Curso</td>
+                    <td class="horas">Horas</td>    
+                    <td class="cantidad">Cantidad Monitorías</td>
+                    <td class="cantidad">Monitorías Asignadas</td>                
+                </tr>
+                {% for monitoria in monitorias  %}
+                    <tr class="par 2">
+                        <td class="idc"> {{ monitoria.idCurso }}</td>
+                        <td class="nomc"> {{ monitoria.NombreCurso }} </td>
+                        <td class="horas"> {{ monitoria.Horas }} </td>    
+                        <td class="cantidad"> {{ monitoria.CantidadMonitorias }} </td>
+                        <td class="cantidad"> 
+                            {% for monitoria1 in monitorias1 if monitoria1.idMonitoria == monitoria.idMonitoria%}
+                                {{ monitoria1.total }}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                 {% endfor %}
+                
+            </table>
+        </div>
+    
+    
+    <h2></h2>
+	<form action="{{ path('solicitud_monitoria_jefe_seccion_asignaciones_actualizar') }}" method="post">
+		<h3> Monitorías Asignadas</h3>
+        <div align="center">
+            <table class="mitabla" >
+                <tr valign="middle">
+                    <td class="nomc"> Nombre del Curso</td>
+                    <td class="nomc">Nombre del Estudiante</td>
+                    <td class="calificacion">Calificación</td>    
+                    <td class="cantidad">Monitorías Solicitada</td>
+                    <td class="cantidad">Monitorías Asignada</td>                
+                </tr>
+                {% set hay = 'no' %}
+                {% for asignacion in asignaciones  %}
+                    {% for solicitud in solicitudes if asignacion.idSolicitud == solicitud.idSolicitud %}
+                        {% set hay = 'si' %}
+                        <tr class="par">
+                            <td class="nomc">{{solicitud.NombreCurso}}</td>
+                            <td class="nomc"><a target="_blank" href="{{path('solicitud_monitoria_jefe_seccion_estudiante',{'idEstudiante':solicitud.idEstudiante})}}">{{solicitud.Nombre}}</a></td>
+                            <td class="calificacion">No dispo</td>    
+                            <td class="cantidad">{{solicitud.CantidadSolicitada}}</td>
+                            <td><select class="cantidad" name="{{solicitud.idSolicitud}}">
+								<option select>-- {{asignacion.CantidadAsignada}} --</option>
+                                {% for i in 0..solicitud.CantidadSolicitada %}
+									<option>{{i}}</option>
+								{%endfor%}
+                                </select>
+							</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+                {% if hay == 'no' %}
+                    <tr class="par" align="center">
+                        <td class="nomc">No hay monitorías asignadas.</td>
+                    </tr>
+                {% endif  %}
+            </table>
+        </div>
+		<h3> </h3>
+		<h3> Solicitudes de Monitorías</h3>
+        <div align="center">
+            <table class="mitabla" >
+                <tr valign="middle">
+                    <td class="nomc"> Nombre del Curso</td>
+                    <td class="nomc">Nombre del Estudiante</td>
+                    <td class="calificacion">Calificación</td>    
+                    <td class="cantidad">Monitorías Solicitada</td>
+                    <td class="cantidad">Monitorías Asignada</td>
+                </tr>
+                {% set hay = 'no' %}
+                {% for solicitud in solicitudes %}
+                    {% set esta = 'no' %}
+                    {% for asignacion in asignaciones if asignacion.idSolicitud == solicitud.idSolicitud%}
+                        {% set esta = 'si' %}
+                    {% endfor %}
+                    {% if esta == 'no' and solicitud.CantidadSolicitada != 0  %}
+                        {% set hay = 'si' %}
+                        <tr class="par">
+                            <td class="nomc">{{solicitud.NombreCurso}}</td>
+                            <td class="nomc"><a target="_blank" href="{{path('solicitud_monitoria_jefe_seccion_estudiante',{'idEstudiante':solicitud.idEstudiante})}}">{{solicitud.Nombre}}</a></td>
+                            <td class="calificacion">No dispo</td>    
+                            <td class="cantidad">{{solicitud.CantidadSolicitada}}</td>
+                            <td><select class="cantidad" name="{{solicitud.idSolicitud}}">
+								{% for i in 0..solicitud.CantidadSolicitada %}
+									<option>{{i}}</option>
+								{%endfor%}
+                                </select>
+							</td>
+                        </tr>
+                    {% endif %}
+                 {% endfor %}
+                 {% if hay == 'no' %}
+                    <tr class="par" align="center">
+                        <td class="nomc">No hay solicitudes para monitorías.</td>
+                    </tr>
+                {% endif  %}
+                <tr class="final" align="center">
+                    <td ><button type="submit">Actualizar</button></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+{% endblock %}

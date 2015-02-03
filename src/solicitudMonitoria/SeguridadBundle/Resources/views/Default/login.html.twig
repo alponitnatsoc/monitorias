@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+{%block stylesheet %}<link href=" {{ asset('css/main.css') }} " type="text\css" rel="stylesheet" />{% endblock %}
+{% block title %}Iniciar Sección{% endblock %}
+{% block body %}     
+     <div id="pagina" class="cfix">
+          <div id="top">
+          </div>
+          <div id="bottom">
+               <div id="menu">
+                    {% block menu %} 
+                    {% endblock %}
+               </div>
+               <div id="contenido">
+                    {% block contenido %} 
+                        {% if error %}
+                            <div>{{ error.message }}</div>
+                        {% endif %}
+                        
+                        {% if app.user %}
+                        {{app.user.roles[0]}}
+                        {% endif %}
+                        <center>
+                        <h5>*Utilice su username de la Javeriana y la contraseña para ingresar.</h5>
+                        <form action="{{ path('solicitud_monitoria_seguridad_login_check') }}" method="post">
+                            <table class="mitablalogin"> 
+                                <tr>
+                                    <td class="llogin">Username:</td>
+                                    <td>
+                                        <input class="login" type="text" id="username" name="_username" value="{{ last_username }}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="llogin">Contraseña:</td>
+                                    <td>
+                                        <input class="login" type="password" id="password" name="_password" />
+                                    </td>
+                                </tr>
+                                <tr class="final" align="center">
+                                    <td ><button type="submit">Login</button></td>
+                                </tr>
+                            </table>
+                        </form>
+                        </center>
+                    {% endblock %}
+               </div>
+          </div>
+</div>
+{% endblock %}     
+
+
+
+
+

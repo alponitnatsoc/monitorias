@@ -1,0 +1,90 @@
+{% extends 'solicitudMonitoriaEstudianteBundle::mainEstudiante.html.twig' %}
+{% block contenido %}
+    <h2>Solicitar Monitorías</h2>
+	<form action="{{ path('solicitud_monitoria_estudiante_actualizar_solicitudes') }}" method="post">
+		<h3> Monitorías Solicitadas</h3>
+        <div align="center">
+        <table class="mitabla" >
+			<tr valign="middle">
+                <td class="idc">IdCurso</td>
+                <td class="nomc">Nombre del Curso</td>
+                <td class="calificacion">Calificación</td>
+				<td class="horas">Horas</td>
+                <td class="cantidad">Cantidad</td>
+            </tr>
+			{%set hay = 'no' %}
+			{% for estudiantesolicitud in estudiantesolicitudes%}
+				{% for estudiantemonitoria in estudiantemonitorias 
+					if estudiantemonitoria.CantidadMonitorias != 0 
+						and estudiantemonitoria.idMonitoria == estudiantesolicitud.idMonitoria 
+						and estudiantesolicitud.CantidadSolicitada != 0%}
+					{% set hay = 'si'%}
+						<tr class="par">
+							<td class="idc">{{estudiantemonitoria.idCurso}}</td>
+							<td class="nomc">{{estudiantemonitoria.NombreCurso}}</td>
+							<td class="calificacion">{{estudiantemonitoria.Calificacion}}</td>
+							<td class="horas">{{estudiantemonitoria.Horas}}</td>
+							<td><select class="cantidad" name="{{estudiantemonitoria.idMonitoria}}">
+								<option select>-- {{estudiantesolicitud.CantidadSolicitada}} --</option>
+								{% for i in 0..estudiantemonitoria.CantidadMonitorias %}
+									<option>{{i}}</option>
+								{%endfor%}
+							</td>
+						</tr>
+				{% endfor %}
+			{% endfor %}
+			{% if hay == 'no' %}
+				<tr class="par" align="middle">
+					<td class="nodispo">No ha solicitado monitorías.</td>
+				</tr>
+			{% endif %}
+        </table></div>
+		<h3> </h3>
+		<h3> Monitorías Disponibles</h3>
+        <div align="center">
+        <table class="mitabla" >
+			<tr valign="middle">
+                <td class="idc">IdCurso</td>
+                <td class="nomc">Nombre del Curso</td>
+                <td class="calificacion">Calificacion</td>
+				<td class="horas">Horas</td>
+                <td class="cantidad">Cantidad</td>
+            </tr>
+			{%set hay = 'no' %}
+			{% for estudiantemonitoria in estudiantemonitorias%}
+				{% if estudiantemonitoria.CantidadMonitorias != 0 %}
+                    {% set esta = 'no' %}
+                    {% for estudiantesolicitud in estudiantesolicitudes %}
+                        {% if estudiantemonitoria.idMonitoria == estudiantesolicitud.idMonitoria 
+                              and estudiantesolicitud.CantidadSolicitada != 0 %}
+                                {% set esta = 'si' %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if esta == 'no' %}
+                        {% set hay = 'si'%}
+                        <tr class="par">
+                            <td class="idc">{{estudiantemonitoria.idCurso}}</td>
+                            <td class="nomc">{{estudiantemonitoria.NombreCurso}}</td>
+                            <td class="calificacion">{{estudiantemonitoria.Calificacion}}</td>
+                            <td class="horas">{{estudiantemonitoria.Horas}}</td>
+                            <td><select class="cantidad" name="{{estudiantemonitoria.idMonitoria}}">
+                                {% for i in 0..estudiantemonitoria.CantidadMonitorias %}
+                                    <option>{{i}}</option>
+                                {%endfor%}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+			{% endfor %}
+			{% if hay == 'no' %}
+				<tr class="par" align="middle">
+					<td class="nodispo">No tiene monitorías disponibles.</td>
+				</tr>
+			{% endif %}
+			<tr class="final" align="center">
+                <td ><button type="submit">Actualizar</button></td>
+            </tr>
+        </table>
+        </div>
+    </form>
+{% endblock %}

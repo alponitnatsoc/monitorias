@@ -1,0 +1,16 @@
+solicitud_monitoria_seguridad:
+    resource: "@solicitudMonitoriaSeguridadBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+solicitud_monitoria_jefe_seccion:
+    resource: "@solicitudMonitoriaJefeSeccionBundle/Resources/config/routing.yml"
+    prefix:   /jefeSeccion
+
+solicitud_monitoria_cursos:
+    resource: "@solicitudMonitoriaCursosBundle/Resources/config/routing.yml"
+    prefix:   /cursos
+
+solicitud_monitoria_estudiante:
+    resource: "@solicitudMonitoriaEstudianteBundle/Resources/config/routing.yml"
+    prefix:   /estudiante
+

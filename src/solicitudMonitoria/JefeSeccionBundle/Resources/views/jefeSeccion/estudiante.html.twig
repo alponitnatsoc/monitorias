@@ -1,0 +1,94 @@
+{% extends 'solicitudMonitoriaJefeSeccionBundle::mainJefeSeccion.html.twig' %}
+{% block contenido %}
+    <h2>Información de {{iestudiante.Nombre}}</h2>
+    <h3>Información </h3>
+        <div align="center">
+            <table class="mitabla">
+                <tr class="rst">
+                    <td class="rst">CódigoSIU:</td>
+                    <td class="sec">{{iestudiante.idEstudiante}}</td>
+                </tr>
+                <tr class="par">
+                    <td class="rst">Tipo de Documento:</td>
+                    <td class="sec1">{{iestudiante.TipoDocumento}}</td>
+                </tr>
+                <tr class="par">
+                    <td class="rst">No. Documento:</td>
+                    <td class="sec1">{{iestudiante.NoDocumento}}</td>
+                </tr>
+                <tr class="par">
+                    <td class="rst">Correo:</td>
+                    <td class="sec1">{{iestudiante.Correo}}</td>
+                </tr>
+                <tr class="par">
+                    <td class="rst">Teléfono:</td>
+                    <td class="sec1">{{iestudiante.Telefono}}</td>
+                </tr>
+                <tr class="par">
+                    <td class="rst">Semestre:</td>
+                    <td class="sec1">{{iestudiante.Semestre}}</td>
+                </tr>
+                <tr class="par">
+                    <td class="rst">Promedio Acumulado:</td>
+                    <td class="sec1">{{iestudiante.PromAcumulado}}</td>
+                </tr> 
+                <tr class="par">
+                    <td class="rst">Calificación como monitor:</td>
+                    <td class="sec1">No disponible</td>
+                </tr>             
+            </table>
+        </div>
+        
+    <h3></h3>
+    <h3>Monitorías Actuales</h3>
+        <div align="center">
+            <table class="mitabla">
+                <tr class="rst">
+                    <td class="calificacion">Periodo Académico</td>
+                    <td class="idc"> idCurso</td>
+                    <td class="nomc">Nombre del Curso</td>
+                    <td class="cantidad">Monitorías Asignadas</td>        
+                    <td class="horas">Horas </td>
+                </tr>
+                {% for asignacion in asignaciones if asignacion.PeriodoAcademico == periodoAcaActual %}
+                    <tr class="par">
+                        <td class="calificacion"> {{asignacion.PeriodoAcademico}}</td>
+                        <td class="idc">{{asignacion.idCurso}}</td>
+                        <td class="nomc">{{asignacion.NombreCurso}}</td>
+                        <td class="cantidad">{{asignacion.CantidadAsignada}}</td>        
+                        <td class="horas">{{asignacion.Horas}}</td>
+                          
+                    </tr>
+                 {% endfor %}
+            </table>
+        </div>
+        <h3></h3>
+        <h3>Monitorías Anteriores</h3>
+        <div align="center">
+            <table class="mitabla">
+                <tr class="rst">
+                    <td class="calificacion">Periodo Académico</td>
+                    <td class="idc"> idCurso</td>
+                    <td class="nomc">Nombre del Curso</td>
+                    <td class="cantidad">Monitorías Asignadas</td> 
+                    <td class="horas">Horas</td>
+                </tr>
+                {% for asignacion in asignaciones if asignacion.PeriodoAcademico != periodoAcaActual %}
+                    <tr class="par">
+                        <td class="calificacion"> {{asignacion.PeriodoAcademico}}</td>
+                        <td class="idc">{{asignacion.idCurso}}</td>
+                        <td class="nomc">{{asignacion.NombreCurso}}</td> 
+                        <td class="cantidad">{{asignacion.CantidadAsignada}}</td> 
+                        <td class="horas">{{asignacion.Horas}}</td>
+                       
+                    </tr>
+                 {% endfor %}
+            </table>
+        </div>
+        
+    <h3></h3>
+    <h3>Comentarios</h3>
+    <div align="center">
+        No disponible
+    </div>
+{% endblock %}

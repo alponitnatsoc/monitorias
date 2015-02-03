@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+{%block stylesheet %}<link href=" {{ asset('css/main.css') }} " type="text\css" rel="stylesheet" />{% endblock %}
+{% block title %}Estudiante{% endblock %}
+{% block body %}     
+     <div id="pagina" class="cfix">
+          <div id="top">
+          </div>
+          <div id="bottom">
+               <div id="menu">
+                    {% block menu %} 
+                         <a href="{{url('solicitud_monitoria_estudiante_homepage')}}"><item> Inicio</item></a>
+                         <a href="{{url('solicitud_monitoria_estudiante_informacion')}}"><item> Información Personal</item></a>
+                         <a href="{{url('solicitud_monitoria_estudiante_solicitar')}}"><item> Solicitar Monitorías</item></a>
+                         <a href="{{url('solicitud_monitoria_seguridad_logout')}}"><item> Salir</item></a>
+                    {% endblock %}
+               </div>
+               <div id="contenido">
+                    {% block contenido %} 
+                         Mi contenido 
+                    {% endblock %}
+               </div>
+          </div>
+</div>
+{% endblock %}     

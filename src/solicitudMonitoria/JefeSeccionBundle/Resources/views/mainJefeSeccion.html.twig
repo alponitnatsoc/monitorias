@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+{%block stylesheet %}<link href=" {{ asset('css/main.css') }} " type="text\css" rel="stylesheet" />{% endblock %}
+{% block title %}Jefe Sección{% endblock %}
+{% block body %}     
+     <div id="pagina" class="cfix">
+          <div id="top">
+          </div>
+          <div id="bottom">
+               <div id="menu">
+                    {% block menu %} 
+                         <a href="{{url('solicitud_monitoria_jefe_seccion_homepage')}}"><item> Inicio</item></a>
+                         <a href="{{url('solicitud_monitoria_jefe_seccion_monitorias')}}"><item> Adm. Monitorías</item></a>
+                         <a href="{{url('solicitud_monitoria_jefe_seccion_asignaciones')}}"><item> Asignaciones </item></a>
+                         
+                         <a href="{{url('solicitud_monitoria_seguridad_logout')}}"><item> Salir</item></a>
+                    {% endblock %}
+               </div>
+               <div id="contenido">
+                    {% block contenido %} 
+                         Mi contenido 
+                    {% endblock %}
+               </div>
+          </div>
+</div>
+{% endblock %}     

@@ -1,0 +1,43 @@
+# app/config/security.yml
+security:
+    
+    providers:
+        administrators:
+            entity: { class: solicitudMonitoriaSeguridadBundle:Usuario}
+        in_memory:
+            memory: 
+                users:
+                    director:
+                        password: pass
+                        roles: 'ROLE_DIRECTOR'
+                    jefeSeccion:
+                        password: pass
+                        roles: 'ROLE_JEFESECCION'
+                    estudiante:
+                        password: pass
+                        roles: 'ROLE_ESTUDIANTE'
+                    admin:
+                        password: admin
+                        roles: 'ROLE_ADMIN'
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        solicitudMonitoria\SeguridadBundle\Entity\Usuario: plaintext
+
+    firewalls:
+       secured_area:
+            pattern:   ^/
+            anonymous: ~
+            form_login:
+                login_path:  /login
+                check_path:  /login_check
+                default_target_path: solicitud_monitoria_seguridad_index
+            logout:
+                path: /logout
+                target: /
+
+    access_control:
+        # require ROLE_ADMIN for /dicDepartamento*
+        - { path: ^/dirDepartamento, roles: ROLE_DIRECTOR }
+        - { path: ^/jefeSeccion, roles: ROLE_JEFESECCION }
+        - { path: ^/estudiante, roles: ROLE_ESTUDIANTE }

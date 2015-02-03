@@ -1,0 +1,28 @@
+solicitud_monitoria_seguridad_homepage:
+    path:     /
+    defaults: { _controller: solicitudMonitoriaSeguridadBundle:Default:login }
+
+solicitud_monitoria_seguridad_login:
+    pattern:   /login
+    defaults:  { _controller: solicitudMonitoriaSeguridadBundle:Default:login }
+
+solicitud_monitoria_seguridad_login_check:
+    pattern:   /login_check
+
+solicitud_monitoria_seguridad_logout:
+    path: /logout
+
+
+
+solicitud_monitoria_seguridad_index:
+    path: /redirect
+    defaults:  { _controller: solicitudMonitoriaSeguridadBundle:Default:index }
+
+
+
+    
+    
+solicitud_monitoria_seguridad_dirDepartamento:
+    path:     /dirDepartamento
+    defaults: { _controller: solicitudMonitoriaSeguridadBundle:Default:dirDepartamento }
+

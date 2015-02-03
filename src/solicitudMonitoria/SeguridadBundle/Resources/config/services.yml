@@ -1,0 +1,4 @@
+services:
+#    solicitud_monitoria_seguridad.example:
+#        class: solicitudMonitoria\SeguridadBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
