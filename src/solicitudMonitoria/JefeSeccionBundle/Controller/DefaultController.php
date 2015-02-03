@@ -13,7 +13,7 @@ class DefaultController extends Controller
         $repository = $this->getDoctrine()->getRepository("solicitudMonitoriaJefeSeccionBundle:JefesSecciones");
         $jefeSeccion = $repository->find($idJefeSeccion);
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $q = "SELECT NombreSeccion FROM seccion where idSeccion = ?";
         $connection = $em->getConnection();
@@ -31,7 +31,7 @@ class DefaultController extends Controller
         $repository = $this->getDoctrine()->getRepository("solicitudMonitoriaJefeSeccionBundle:JefesSecciones");
         $jefeSeccion = $repository->find($idJefeSeccion);
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $q = "SELECT * FROM cursos,monitorias where cursos.idCurso = monitorias.idCurso and cursos.idSeccion = ? order by cursos.NombreCurso ASC";
         $connection = $em->getConnection();
         $statement = $connection->prepare($q);
@@ -50,7 +50,7 @@ class DefaultController extends Controller
                     $_idCurso = $_values[$i];
                     $_horas = $_values[$i+1];
                     $_cantidad = $_values[$i+2];
-                    $em = $this->getDoctrine()->getEntityManager();
+                    $em = $this->getDoctrine()->getManager();
                     
                     $q = "SELECT idMonitoria FROM monitorias where monitorias.idCurso = ?";
                     $connection = $em->getConnection();
@@ -73,7 +73,7 @@ class DefaultController extends Controller
     
     public function asignacionesAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $connection = $em->getConnection();
         
         $periodoAcaActual = $em->getRepository('solicitudMonitoriaCursosBundle:PeriodoAcademico')->find(1)->getPeriodoAcadActual();	
@@ -122,15 +122,23 @@ class DefaultController extends Controller
                 ";
                 
         $statement = $connection->prepare($q2);
-        $statement->bindValue(1,$periodoAcaActual);
         $statement->execute();
         $monitorias=$statement->fetchALL();
         
-        return $this->render('solicitudMonitoriaJefeSeccionBundle:jefeSeccion:asignaciones.html.twig',array ('solicitudes' => $solicitudes,'asignaciones' => $asignaciones,'monitorias' => $monitorias,'monitorias1' => $monitorias1));
+        $q3 = "SELECT solicitudes.idEstudiante,avg(Calificacion) as promedio FROM calificacionestudiante,asignaciones,solicitudes 
+                        where calificacionestudiante.idAsignacion = asignaciones.idAsignacion 
+                        and asignaciones.idSolicitud = solicitudes.idSolicitud
+                        and calificacionestudiante.Calificacion != 0 group by solicitudes.idEstudiante";
+        $statement = $connection->prepare($q3);
+        $statement->execute();
+        $promedios=$statement->fetchALL();
+        
+        
+        return $this->render('solicitudMonitoriaJefeSeccionBundle:jefeSeccion:asignaciones.html.twig',array ('solicitudes' => $solicitudes,'asignaciones' => $asignaciones,'monitorias' => $monitorias,'monitorias1' => $monitorias1, 'promedios'=>$promedios));
     }
     public function actualizarasignaAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $connection = $em->getConnection();
         $periodoAcaActual = $em->getRepository('solicitudMonitoriaCursosBundle:PeriodoAcademico')->find(1)->getPeriodoAcadActual();	
         
@@ -169,7 +177,7 @@ class DefaultController extends Controller
     
     public function estudianteAction($idEstudiante)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $connection = $em->getConnection();
         $periodoAcaActual = $em->getRepository('solicitudMonitoriaCursosBundle:PeriodoAcademico')->find(1)->getPeriodoAcadActual();	
         
@@ -190,16 +198,49 @@ class DefaultController extends Controller
         $statement->execute();
         $asignaciones=$statement->fetchALL();
         
+        
+        $q2 = "SELECT * FROM calificacionestudiante,asignaciones,solicitudes where calificacionestudiante.idAsignacion = asignaciones.idAsignacion 
+                        and asignaciones.idSolicitud = solicitudes.idSolicitud 
+                        and solicitudes.idEstudiante = ? ";
+        $statement = $connection->prepare($q2);
+        $statement->bindValue(1,$idEstudiante);
+        $statement->execute();
+        $calificacionesestudiante=$statement->fetchALL();
+        
+        $q3 = "SELECT avg(Calificacion) as promedio FROM calificacionestudiante,asignaciones,solicitudes where calificacionestudiante.idAsignacion = asignaciones.idAsignacion 
+                        and asignaciones.idSolicitud = solicitudes.idSolicitud 
+                        and solicitudes.idEstudiante = ? ";
+        $statement = $connection->prepare($q3);
+        $statement->bindValue(1,$idEstudiante);
+        $statement->execute();
+        $promedio=$statement->fetchALL()[0]['promedio'];
+        
+        
         $q1 = "SELECT * FROM estudiantes where estudiantes.idEstudiante = ? ";
      
         $statement = $connection->prepare($q1);
         $statement->bindValue(1,$idEstudiante);
         $statement->execute();
         $iestudiante=$statement->fetchALL()[0];
-
        
-       return $this->render('solicitudMonitoriaJefeSeccionBundle:jefeSeccion:estudiante.html.twig',array ('asignaciones' => $asignaciones,'iestudiante' => $iestudiante,'periodoAcaActual' => $periodoAcaActual));
+       
+       return $this->render('solicitudMonitoriaJefeSeccionBundle:jefeSeccion:estudiante.html.twig',array(   'asignaciones' => $asignaciones,
+                                                                                                            'iestudiante' => $iestudiante,
+                                                                                                            'periodoAcaActual' => $periodoAcaActual,));
+ 
+    }
     
+    
+    public function calificacionAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+        $periodoAcaActual = $em->getRepository('solicitudMonitoriaCursosBundle:PeriodoAcademico')->find(1)->getPeriodoAcadActual();	
+        
+       
+       
+        return $this->render('solicitudMonitoriaJefeSeccionBundle:jefeSeccion:estudiante.html.twig');
+ 
     }
     
 }

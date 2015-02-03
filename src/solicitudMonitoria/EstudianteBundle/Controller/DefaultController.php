@@ -53,7 +53,7 @@ class DefaultController extends Controller
     public function solicitarAction()
     {
         $idEstudiante = $this->getUser()->getId();
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
         
         $q = "SELECT * FROM estudiantecurso,cursos,monitorias where estudiantecurso.idCurso = cursos.idCurso and estudiantecurso.idCurso = monitorias.idCurso and idEstudiante = ? and estudiantecurso.calificacion >= 3  order by NombreCurso ASC ";
         $connection = $em->getConnection();
@@ -78,7 +78,7 @@ class DefaultController extends Controller
     public function actualizarsoliAction()
     {
         $idEstudiante = $this->getUser()->getId();
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $connection = $em->getConnection();
         $periodoAcaActual = $em->getRepository('solicitudMonitoriaCursosBundle:PeriodoAcademico')->find(1)->getPeriodoAcadActual();	
         

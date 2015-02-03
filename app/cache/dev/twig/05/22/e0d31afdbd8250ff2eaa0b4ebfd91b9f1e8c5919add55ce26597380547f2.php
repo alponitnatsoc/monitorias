@@ -93,7 +93,10 @@ class __TwigTemplate_0522e0d31afdbd8250ff2eaa0b4ebfd91b9f1e8c5919add55ce26597380
                 </tr> 
                 <tr class=\"par\">
                     <td class=\"rst\">Calificación como monitor:</td>
-                    <td class=\"sec1\">No disponible</td>
+                    <td class=\"sec1\">";
+        // line 37
+        echo twig_escape_filter($this->env, twig_round((isset($context["promedio"]) ? $context["promedio"] : $this->getContext($context, "promedio")), 2), "html", null, true);
+        echo "</td>
                 </tr>             
             </table>
         </div>
@@ -157,7 +160,7 @@ class __TwigTemplate_0522e0d31afdbd8250ff2eaa0b4ebfd91b9f1e8c5919add55ce26597380
                     <td class=\"idc\"> idCurso</td>
                     <td class=\"nomc\">Nombre del Curso</td>
                     <td class=\"cantidad\">Monitorías Asignadas</td> 
-                    <td class=\"horas\">Horas</td>
+                    <td class=\"calificacion\">Calificación del monitor</td>
                 </tr>
                 ";
         // line 76
@@ -183,10 +186,24 @@ class __TwigTemplate_0522e0d31afdbd8250ff2eaa0b4ebfd91b9f1e8c5919add55ce26597380
                 // line 81
                 echo twig_escape_filter($this->env, $this->getAttribute($context["asignacion"], "CantidadAsignada", array()), "html", null, true);
                 echo "</td> 
-                        <td class=\"horas\">";
+                         ";
                 // line 82
-                echo twig_escape_filter($this->env, $this->getAttribute($context["asignacion"], "Horas", array()), "html", null, true);
-                echo "</td>
+                $context['_parent'] = (array) $context;
+                $context['_seq'] = twig_ensure_traversable((isset($context["calificacionesestudiante"]) ? $context["calificacionesestudiante"] : $this->getContext($context, "calificacionesestudiante")));
+                foreach ($context['_seq'] as $context["_key"] => $context["calificacionestudiante"]) {
+                    if (($this->getAttribute($context["calificacionestudiante"], "idAsignacion", array()) == $this->getAttribute($context["asignacion"], "idAsignacion", array()))) {
+                        // line 83
+                        echo "                            <td class=\"calificacion\">";
+                        echo twig_escape_filter($this->env, $this->getAttribute($context["calificacionestudiante"], "Calificacion", array()), "html", null, true);
+                        echo "</td>
+                        ";
+                    }
+                }
+                $_parent = $context['_parent'];
+                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['calificacionestudiante'], $context['_parent'], $context['loop']);
+                $context = array_intersect_key($context, $_parent) + $_parent;
+                // line 84
+                echo " 
                        
                     </tr>
                  ";
@@ -195,7 +212,7 @@ class __TwigTemplate_0522e0d31afdbd8250ff2eaa0b4ebfd91b9f1e8c5919add55ce26597380
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['asignacion'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 86
+        // line 88
         echo "            </table>
         </div>
         
@@ -219,6 +236,6 @@ class __TwigTemplate_0522e0d31afdbd8250ff2eaa0b4ebfd91b9f1e8c5919add55ce26597380
 
     public function getDebugInfo()
     {
-        return array (  199 => 86,  188 => 82,  184 => 81,  180 => 80,  176 => 79,  172 => 78,  169 => 77,  164 => 76,  149 => 63,  138 => 59,  134 => 58,  130 => 57,  126 => 56,  122 => 55,  119 => 54,  114 => 53,  91 => 33,  84 => 29,  77 => 25,  70 => 21,  63 => 17,  56 => 13,  49 => 9,  39 => 3,  36 => 2,  11 => 1,);
+        return array (  216 => 88,  206 => 84,  196 => 83,  191 => 82,  187 => 81,  183 => 80,  179 => 79,  175 => 78,  172 => 77,  167 => 76,  152 => 63,  141 => 59,  137 => 58,  133 => 57,  129 => 56,  125 => 55,  122 => 54,  117 => 53,  98 => 37,  91 => 33,  84 => 29,  77 => 25,  70 => 21,  63 => 17,  56 => 13,  49 => 9,  39 => 3,  36 => 2,  11 => 1,);
     }
 }

@@ -22,4 +22,6 @@ solicitud_monitoria_jefe_seccion_estudiante:
     path:     /estudiante/{idEstudiante}
     defaults: { _controller: solicitudMonitoriaJefeSeccionBundle:Default:estudiante }
     
-    
+solicitud_monitoria_jefe_seccion_calificacion_estudiante:
+    path:     /calificacion
+    defaults: { _controller: solicitudMonitoriaJefeSeccionBundle:Default:calificacion }

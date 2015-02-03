@@ -42,7 +42,7 @@ class __TwigTemplate_be6a8d2ede41c4c5aca9fa15fea7c5717e80794475c81247cae545bde61
     <div class=\"fila impar\">Aquí podrás administrar las monitorias que ofrece la sección de ";
         // line 4
         echo twig_escape_filter($this->env, (isset($context["nombreSeccion"]) ? $context["nombreSeccion"] : null), "html", null, true);
-        echo " del Departamento de Ingeniería Electrónica.</div>
+        echo " del Departamento de Electrónica.</div>
 ";
     }
 

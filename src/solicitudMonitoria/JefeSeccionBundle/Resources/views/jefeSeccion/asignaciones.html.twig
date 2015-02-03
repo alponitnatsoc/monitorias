@@ -37,7 +37,7 @@
                 <tr valign="middle">
                     <td class="nomc"> Nombre del Curso</td>
                     <td class="nomc">Nombre del Estudiante</td>
-                    <td class="calificacion">Calificación</td>    
+                    <td class="calificacion">Calificación del monitor</td>    
                     <td class="cantidad">Monitorías Solicitada</td>
                     <td class="cantidad">Monitorías Asignada</td>                
                 </tr>
@@ -48,7 +48,11 @@
                         <tr class="par">
                             <td class="nomc">{{solicitud.NombreCurso}}</td>
                             <td class="nomc"><a target="_blank" href="{{path('solicitud_monitoria_jefe_seccion_estudiante',{'idEstudiante':solicitud.idEstudiante})}}">{{solicitud.Nombre}}</a></td>
-                            <td class="calificacion">No dispo</td>    
+                            <td class="calificacion">
+                            {% for promedio in promedios if promedio.idEstudiante == solicitud.idEstudiante %}
+                                 {{ promedio.promedio|round(2) }}
+                            {% endfor %}
+                            </td>    
                             <td class="cantidad">{{solicitud.CantidadSolicitada}}</td>
                             <td><select class="cantidad" name="{{solicitud.idSolicitud}}">
 								<option select>-- {{asignacion.CantidadAsignada}} --</option>
@@ -74,7 +78,7 @@
                 <tr valign="middle">
                     <td class="nomc"> Nombre del Curso</td>
                     <td class="nomc">Nombre del Estudiante</td>
-                    <td class="calificacion">Calificación</td>    
+                    <td class="calificacion">Calificación del monitor</td>    
                     <td class="cantidad">Monitorías Solicitada</td>
                     <td class="cantidad">Monitorías Asignada</td>
                 </tr>
@@ -89,7 +93,11 @@
                         <tr class="par">
                             <td class="nomc">{{solicitud.NombreCurso}}</td>
                             <td class="nomc"><a target="_blank" href="{{path('solicitud_monitoria_jefe_seccion_estudiante',{'idEstudiante':solicitud.idEstudiante})}}">{{solicitud.Nombre}}</a></td>
-                            <td class="calificacion">No dispo</td>    
+                            <td class="calificacion">
+                            {% for promedio in promedios if promedio.idEstudiante == solicitud.idEstudiante %}
+                                 {{ promedio.promedio|round(2) }}
+                            {% endfor %}
+                            </td>    
                             <td class="cantidad">{{solicitud.CantidadSolicitada}}</td>
                             <td><select class="cantidad" name="{{solicitud.idSolicitud}}">
 								{% for i in 0..solicitud.CantidadSolicitada %}

@@ -34,7 +34,7 @@
                 </tr> 
                 <tr class="par">
                     <td class="rst">Calificación como monitor:</td>
-                    <td class="sec1">No disponible</td>
+                    <td class="sec1">{{ promedio|round(2) }}</td>
                 </tr>             
             </table>
         </div>
@@ -71,7 +71,7 @@
                     <td class="idc"> idCurso</td>
                     <td class="nomc">Nombre del Curso</td>
                     <td class="cantidad">Monitorías Asignadas</td> 
-                    <td class="horas">Horas</td>
+                    <td class="calificacion">Calificación del monitor</td>
                 </tr>
                 {% for asignacion in asignaciones if asignacion.PeriodoAcademico != periodoAcaActual %}
                     <tr class="par">
@@ -79,7 +79,9 @@
                         <td class="idc">{{asignacion.idCurso}}</td>
                         <td class="nomc">{{asignacion.NombreCurso}}</td> 
                         <td class="cantidad">{{asignacion.CantidadAsignada}}</td> 
-                        <td class="horas">{{asignacion.Horas}}</td>
+                         {% for calificacionestudiante in calificacionesestudiante if calificacionestudiante.idAsignacion == asignacion.idAsignacion %}
+                            <td class="calificacion">{{calificacionestudiante.Calificacion}}</td>
+                        {% endfor %} 
                        
                     </tr>
                  {% endfor %}

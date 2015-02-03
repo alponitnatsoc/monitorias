@@ -13,7 +13,7 @@ class DefaultController extends Controller
     {
         //DEFINIMOS LA CONSULTA
         $q = "SELECT * FROM solicitudes where idEstudiante = 3";
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $connection = $em->getConnection();
         $statement = $connection->prepare($q);
         $statement->execute();

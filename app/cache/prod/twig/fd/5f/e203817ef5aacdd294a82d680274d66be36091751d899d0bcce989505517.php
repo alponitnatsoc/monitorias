@@ -39,7 +39,7 @@ class __TwigTemplate_fd5fe203817ef5aacdd294a82d680274d66be36091751d899d0bcce9895
         echo "\t<h2>Bienvenido ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["estudiante"]) ? $context["estudiante"] : null), "nombre", array()), "html", null, true);
         echo "</h2>
-    <div class=\"fila impar\">Aquí podrás solicitar las monitorias que ofrece el Departamento de Ingeniería Electrónica.</div>
+    <div class=\"fila impar\">Aquí podrás solicitar las monitorias que ofrece el Departamento de Electrónica.</div>
 ";
     }
 
