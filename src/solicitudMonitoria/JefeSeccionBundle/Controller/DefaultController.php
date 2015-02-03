@@ -226,10 +226,11 @@ class DefaultController extends Controller
        
        return $this->render('solicitudMonitoriaJefeSeccionBundle:jefeSeccion:estudiante.html.twig',array(   'asignaciones' => $asignaciones,
                                                                                                             'iestudiante' => $iestudiante,
-                                                                                                            'periodoAcaActual' => $periodoAcaActual,));
- 
-    }
+                                                                                                            'periodoAcaActual' => $periodoAcaActual,
+                                                                                                            'promedio' => $promedio,
+                                                                                                            'calificacionesestudiante' => $calificacionesestudiante));
     
+    }
     
     public function calificacionAction()
     {
@@ -239,7 +240,7 @@ class DefaultController extends Controller
         
        
        
-        return $this->render('solicitudMonitoriaJefeSeccionBundle:jefeSeccion:estudiante.html.twig');
+        return $this->render('solicitudMonitoriaJefeSeccionBundle:jefeSeccion:calificacion.html.twig');
  
     }
     

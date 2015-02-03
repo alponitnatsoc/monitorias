@@ -91,7 +91,10 @@ class __TwigTemplate_c84f7ad514f96541d696ed9cf8dcdd03072ad3c214e15b6b86263708895
         // line 13
         echo $this->env->getExtension('routing')->getUrl("solicitud_monitoria_jefe_seccion_asignaciones");
         echo "\"><item> Asignaciones </item></a>
-                         
+                         <a href=\"";
+        // line 14
+        echo $this->env->getExtension('routing')->getUrl("solicitud_monitoria_jefe_seccion_calificar_estudiante");
+        echo "\"><item> Calificar monitores </item></a>
                          <a href=\"";
         // line 15
         echo $this->env->getExtension('routing')->getUrl("solicitud_monitoria_seguridad_logout");
@@ -119,6 +122,6 @@ class __TwigTemplate_c84f7ad514f96541d696ed9cf8dcdd03072ad3c214e15b6b86263708895
 
     public function getDebugInfo()
     {
-        return array (  103 => 19,  97 => 15,  92 => 13,  88 => 12,  84 => 11,  79 => 10,  72 => 22,  70 => 19,  66 => 17,  64 => 10,  54 => 4,  48 => 3,  40 => 2,  11 => 1,);
+        return array (  106 => 19,  100 => 15,  96 => 14,  92 => 13,  88 => 12,  84 => 11,  79 => 10,  72 => 22,  70 => 19,  66 => 17,  64 => 10,  54 => 4,  48 => 3,  40 => 2,  11 => 1,);
     }
 }

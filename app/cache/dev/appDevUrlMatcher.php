@@ -208,6 +208,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'solicitud_monitoria_jefe_seccion_estudiante')), array (  '_controller' => 'solicitudMonitoria\\JefeSeccionBundle\\Controller\\DefaultController::estudianteAction',));
             }
 
+            // solicitud_monitoria_jefe_seccion_calificar_estudiante
+            if ($pathinfo === '/jefeSeccion/calificar_monitores') {
+                return array (  '_controller' => 'solicitudMonitoria\\JefeSeccionBundle\\Controller\\DefaultController::calificacionAction',  '_route' => 'solicitud_monitoria_jefe_seccion_calificar_estudiante',);
+            }
+
         }
 
         // solicitud_monitoria_cursos_cursos
